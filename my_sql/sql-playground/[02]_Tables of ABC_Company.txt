@@ -1,0 +1,46 @@
+CREATE TABLE Employee (
+    Fname VARCHAR(20),
+    Lname VARCHAR(20),
+    Ssn INT PRIMARY KEY NOT NULL,
+    Bdate DATE,
+    Address VARCHAR(50),
+    Sex ENUM('M', 'F', 'O'),
+    Salary DOUBLE,
+    Supper_Ssn INT,
+    Dnumber SMALLINT,
+    FOREIGN KEY (Dnumber)
+        REFERENCES Department (Dnumber)
+);
+CREATE TABLE Department (
+    Dname VARCHAR(20),
+    Dnumber SMALLINT NOT NULL AUTO_INCREMENT,
+    Mgr_ssn INT,
+    Mgr_start_date DATE,
+    PRIMARY KEY (Dnumber)
+);
+CREATE TABLE Dept_Locations (
+    Dnumber SMALLINT,
+    Dlocation VARCHAR(30) PRIMARY KEY NOT NULL,
+    FOREIGN KEY (Dnumber)
+        REFERENCES Department (Dnumber)
+);
+CREATE TABLE Project (
+    Pname VARCHAR(30),
+    Pnumber SMALLINT PRIMARY KEY NOT NULL,
+    Plocation VARCHAR(20),
+    Dnumber SMALLINT,
+    FOREIGN KEY (Dnumber)
+        REFERENCES Department (Dnumber)
+);
+CREATE TABLE Works_On (
+    Essn INT NOT NULL,
+    Pnumber SMALLINT NOT NULL,
+    Hours DOUBLE
+);
+CREATE TABLE Dependent (
+    Essn INT,
+    Dependent_name VARCHAR(30) NOT NULL,
+    Sex ENUM('M', 'F', 'O'),
+    Bdate DATE,
+    Relationship VARCHAR(20)
+);
