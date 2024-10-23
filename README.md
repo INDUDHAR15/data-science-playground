@@ -1,1 +1,1 @@
-# All about learning with data
+# All about learning and playing with data
