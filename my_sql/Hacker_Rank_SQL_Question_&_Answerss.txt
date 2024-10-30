@@ -1,0 +1,113 @@
+1.
+Query a list of CITY names from STATION for cities that have an even ID number. Print the results in any order, but exclude duplicates from the answer.
+
+#	SELECT DISTINCT CITY FROM STATION WHERE (ID%2) = 0;
+
+2.
+Find the difference between the total number of CITY entries in the table and the number of distinct CITY entries in the table.
+
+#	SELECT COUNT(CITY) - COUNT(DISTINCT CITY) from STATION;
+
+
+3.
+Query the two cities in STATION with the shortest and longest CITY names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+The STATION table is described as follows:
+
+Station.jpg
+
+where LAT_N is the northern latitude and LONG_W is the western longitude.
+
+Sample Input
+
+For example, CITY has four entries: DEF, ABC, PQRS and WXY.
+
+Sample Output
+
+ABC 3
+PQRS 4
+Explanation
+
+When ordered alphabetically, the CITY names are listed as ABC, DEF, PQRS, and WXY, with lengths  and . The longest name is PQRS, but there are  options for shortest named city. Choose ABC, because it comes first alphabetically.
+
+Note
+You can write two separate queries to get the desired output. It need not be a single query.
+
+
+#
+SELECT CITY, LENGTH(CITY) FROM STATION ORDER BY 2 ASC, 1 LIMIT 1;
+SELECT CITY, LENGTH(CITY) FROM STATION ORDER BY 2 DESC,1 LIMIT 1;
+
+
+4.
+Query the list of CITY names from STATION which have vowels (i.e., a, e, i, o, and u) as both their first and last characters. Your result cannot contain duplicates.
+#
+SELECT DISTINCT CITY FROM STATION WHERE CITY REGEXP '^[AEIOU].*[aeiou]$';
+
+
+5.
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+#
+SELECT DISTINCT CITY FROM STATION WHERE CITY NOT REGEXP '^[AEIOU]';
+
+
+6.
+Query the list of CITY names from STATION that do not start with vowels. Your result cannot contain duplicates.
+#
+SELECT DISTINCT CITY FROM STATION WHERE CITY NOT REGEXP '[aeiou]$';
+
+7.
+Query the list of CITY names from STATION that either do not start with vowels or do not end with vowels. Your result cannot contain duplicates.
+#
+SELECT DISTINCT CITY FROM STATION WHERE CITY NOT REGEXP '^[AEIOU].*[aeiou]$';
+
+8.
+Query the list of CITY names from STATION that do not start with vowels and do not end with vowels. Your result cannot contain duplicates.
+#
+SELECT DISTINCT CITY FROM STATION WHERE CITY NOT REGEXP '^[AEIOU]' AND CITY NOT REGEXP '[aeiou]$';
+
+9.
+Query the Name of any student in STUDENTS who scored higher than  Marks. Order your output by the last three characters of each name. If two or more students both have names ending in the same last three characters (i.e.: Bobby, Robby, etc.), secondary sort them by ascending ID.
+#
+SELECT NAME FROM STUDENTS WHERE MARKS > 75 ORDER BY RIGHT(NAME,3),ID ASC;
+
+10.
+Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+
+Equilateral: It's a triangle with  sides of equal length.
+Isosceles: It's a triangle with  sides of equal length.
+Scalene: It's a triangle with  sides of differing lengths.
+Not A Triangle: The given values of A, B, and C don't form a triangle.
+#
+SELECT IF(A+B<=C OR B+C<=A OR A+C<=B,"Not A Triangle",
+IF(A=B AND B=C,"Equilateral",
+IF(A=B OR B=C OR A=C,"Isosceles","Scalene")))
+FROM TRIANGLES;
+
+-- 30/10/2024
+11.
+Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA.
+#
+SELECT * FROM CITY WHERE COUNTRYCODE = "USA" AND POPULATION > 100000;
+
+12.
+Query the NAME field for all American cities in the CITY table with populations larger than 120000. The CountryCode for America is USA.
+#
+SELECT NAME FROM CITY WHERE COUNTRYCODE = "USA" AND POPULATION > 120000;
+
+13.
+Query the following two values from the STATION table:
+The sum of all values in LAT_N rounded to a scale of 2 decimal places.
+The sum of all values in LONG_W rounded to a scale of 2 decimal places.
+#
+SELECT ROUND(SUM(LAT_N),2), ROUND(SUM(LONG_W),2) FROM STATION;
+
+14.
+Query the sum of Northern Latitudes (LAT_N) from STATION having values greater than 38.7880 and less than 137.2345. Truncate your answer to 4 decimal places.
+#
+SELECT ROUND(SUM(LAT_N),4) FROM STATION 
+WHERE LAT_N BETWEEN 38.7880 AND 137.2345;
+
+15.
+Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places
+#
+SELECT MAX(ROUND(LAT_N,4)) FROM STATION WHERE LAT_N < 137.2345;
