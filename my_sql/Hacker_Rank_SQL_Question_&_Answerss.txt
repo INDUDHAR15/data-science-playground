@@ -111,3 +111,35 @@ WHERE LAT_N BETWEEN 38.7880 AND 137.2345;
 Query the greatest value of the Northern Latitudes (LAT_N) from STATION that is less than 137.2345. Truncate your answer to 4 decimal places
 #
 SELECT MAX(ROUND(LAT_N,4)) FROM STATION WHERE LAT_N < 137.2345;
+
+-- 31/10/2024
+
+16.
+Query a count of the number of cities in CITY having a Population larger than 100000.
+#
+SELECT COUNT(*) FROM city WHERE population > 100000;
+
+17.
+Query the total population of all cities in CITY where District is California.
+#
+SELECT SUM(population) FROM city WHERE district = "california";
+
+18.
+Query the average population of all cities in CITY where District is California.
+#
+SELECT AVG(population) FROM city WHERE district = "california";
+
+19.
+Query the average population for all cities in CITY, rounded down to the nearest integer.
+#
+SELECT ROUND(AVG(population),0) FROM city;
+
+20.
+Query the sum of the populations for all Japanese cities in CITY. The COUNTRYCODE for Japan is JPN
+#
+SELECT SUM(population) FROM city WHERE countrycode = "JPN";
+
+21.
+Query the difference between the maximum and minimum populations in CITY.
+#
+SELECT MAX(population) - MIN(population) AS population_range FROM city;
