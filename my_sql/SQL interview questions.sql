@@ -51,3 +51,10 @@ SELECT e_name
 FROM table_name 
 WHERE COUNT(leaves) > 3
 GROUP BY month_name; 
+
+-- Which of the following are types of Unicode character string types in SQL?
+nchar and ntext
+nchar and ntext are types of Unicode character strings datatypes in SQL.
+
+-- What does BLOB in SQL stand for?
+BLOB in SQL stands for Binary Large Objects which is an SQL Object datatype.
